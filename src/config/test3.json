@@ -1,27 +1,24 @@
 {
-	"name": "Test 3",
-	"age": 30,
-	"address": {
-		"street": "123 Main St",
-		"city": "Anytown",
-		"zipcode": "12345"
+	"hobbyDetails": {
+		"statements": [
+			{
+				"predicate": "hasHobby",
+				"prefix": "ex"
+			}
+		],
+		"question": "What are the person's hobbies?"
 	},
-	"hobbies": ["reading", "hiking", "coding"],
-	"isEmployed": true,
-	"projects": [
-		{
-			"title": "Project A",
-			"description": "Description for Project A",
-			"status": "completed"
-		},
-		{
-			"title": "Project B",
-			"description": "Description for Project B",
-			"status": "in-progress"
-		}
-	],
-	"contact": {
-		"email": "johndoe@example.com",
-		"phone": "123-456-7890"
+	"contactInfo": {
+		"statements": [
+			{
+				"predicate": "hasEmail",
+				"prefix": "ex"
+			},
+			{
+				"predicate": "hasPhoneNumber",
+				"prefix": "ex"
+			}
+		],
+		"question": "How can you contact the person?"
 	}
 }

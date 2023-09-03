@@ -1,27 +1,24 @@
 {
-	"name": "Test 4",
-	"age": 30,
-	"address": {
-		"street": "123 Main St",
-		"city": "Anytown",
-		"zipcode": "12345"
+	"familyDetails": {
+		"statements": [
+			{
+				"predicate": "hasSibling",
+				"prefix": "ex"
+			},
+			{
+				"predicate": "hasParent",
+				"prefix": "ex"
+			}
+		],
+		"question": "Who are the person's family members?"
 	},
-	"hobbies": ["reading", "hiking", "coding"],
-	"isEmployed": true,
-	"projects": [
-		{
-			"title": "Project A",
-			"description": "Description for Project A",
-			"status": "completed"
-		},
-		{
-			"title": "Project B",
-			"description": "Description for Project B",
-			"status": "in-progress"
-		}
-	],
-	"contact": {
-		"email": "johndoe@example.com",
-		"phone": "123-456-7890"
+	"travelInfo": {
+		"statements": [
+			{
+				"predicate": "visitedPlace",
+				"prefix": "ex"
+			}
+		],
+		"question": "Where has the person traveled?"
 	}
 }

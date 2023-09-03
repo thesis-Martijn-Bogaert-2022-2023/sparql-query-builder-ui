@@ -1,27 +1,24 @@
 {
-	"name": "Test 2",
-	"age": 30,
-	"address": {
-		"street": "123 Main St",
-		"city": "Anytown",
-		"zipcode": "12345"
+	"jobDetails": {
+		"statements": [
+			{
+				"predicate": "hasJobTitle",
+				"prefix": "ex"
+			},
+			{
+				"predicate": "worksFor",
+				"prefix": "ex"
+			}
+		],
+		"question": "What is the person's job title and employer?"
 	},
-	"hobbies": ["reading", "hiking", "coding"],
-	"isEmployed": true,
-	"projects": [
-		{
-			"title": "Project A",
-			"description": "Description for Project A",
-			"status": "completed"
-		},
-		{
-			"title": "Project B",
-			"description": "Description for Project B",
-			"status": "in-progress"
-		}
-	],
-	"contact": {
-		"email": "johndoe@example.com",
-		"phone": "123-456-7890"
+	"educationInfo": {
+		"statements": [
+			{
+				"predicate": "studiedAt",
+				"prefix": "ex"
+			}
+		],
+		"question": "Where did the person study?"
 	}
 }

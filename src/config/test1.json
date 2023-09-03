@@ -1,27 +1,24 @@
 {
-	"name": "John Doe",
-	"age": 30,
-	"address": {
-		"street": "123 Main St",
-		"city": "Anytown",
-		"zipcode": "12345"
+	"personInfo": {
+		"statements": [
+			{
+				"predicate": "hasName",
+				"prefix": "ex"
+			},
+			{
+				"predicate": "hasAge",
+				"prefix": "ex"
+			}
+		],
+		"question": "What is the name and age of the person?"
 	},
-	"hobbies": ["reading", "hiking", "coding"],
-	"isEmployed": true,
-	"projects": [
-		{
-			"title": "Project A",
-			"description": "Description for Project A",
-			"status": "completed"
-		},
-		{
-			"title": "Project B",
-			"description": "Description for Project B",
-			"status": "in-progress"
-		}
-	],
-	"contact": {
-		"email": "johndoe@example.com",
-		"phone": "123-456-7890"
+	"addressInfo": {
+		"statements": [
+			{
+				"predicate": "livesAt",
+				"prefix": "ex"
+			}
+		],
+		"question": "Where does the person live?"
 	}
 }

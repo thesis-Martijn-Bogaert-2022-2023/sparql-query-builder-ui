@@ -1,16 +1,21 @@
+import React from 'react';
 import Module from './Module';
+import { Properties } from './types';
 
-export default function App() {
-	// Import all JSON files from the config directory
-	const configFiles = import.meta.glob('./config/*.json');
-	const fileNames = Object.keys(configFiles);
+const App: React.FC = () => {
+	const modules = import.meta.glob('./config/*.json');
 
 	return (
-		<>
-			<div>Hello World</div>
-			{fileNames.map((filePath) => (
-				<Module key={filePath} filePath={filePath} />
+		<div>
+			{Object.entries(modules).map(([filePath, importFn]) => (
+				<Module
+					key={filePath}
+					filePath={filePath}
+					importFn={importFn as () => Promise<{ default: Properties }>}
+				/>
 			))}
-		</>
+		</div>
 	);
-}
+};
+
+export default App;
