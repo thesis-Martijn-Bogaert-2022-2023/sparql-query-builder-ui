@@ -1,10 +1,11 @@
 .property-block {
-	border: 1px solid black;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
 	padding: 10px;
 	margin: 10px 0;
 	cursor: pointer;
 }
 
 .property-block.selected {
-	background-color: #e0e0e0;
+	background-color: #a6e66f;
 }
