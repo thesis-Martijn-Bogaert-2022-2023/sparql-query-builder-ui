@@ -25,6 +25,8 @@ img {
 
 .property-blocks-container {
 	display: flex;
+	justify-content: space-evenly;
 	flex-wrap: wrap;
 	gap: 10px;
+	padding: 10px;
 }

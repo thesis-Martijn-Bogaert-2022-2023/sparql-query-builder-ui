@@ -28,6 +28,17 @@ const App: React.FC = () => {
 		);
 	};
 
+	const handlePropertyUpdate = (updatedProperty: SelectedProperty) => {
+		setSelectedProperties((prev) =>
+			prev.map((property) =>
+				property.fileName === updatedProperty.fileName &&
+				property.propertyName === updatedProperty.propertyName
+					? { ...property, propertyDetails: updatedProperty.propertyDetails }
+					: property
+			)
+		);
+	};
+
 	return (
 		<>
 			<h1>SPARQL Query Builder</h1>
@@ -42,6 +53,7 @@ const App: React.FC = () => {
 							onPrefixesLoaded={handlePrefixesLoaded}
 							onPropertySelect={handlePropertySelect}
 							onPropertyDeselect={handlePropertyDeselect}
+							onPropertyUpdate={handlePropertyUpdate}
 						/>
 					))}
 				</div>

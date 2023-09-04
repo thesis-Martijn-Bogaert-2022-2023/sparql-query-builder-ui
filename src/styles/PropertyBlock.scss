@@ -1,12 +1,43 @@
 .property-block {
 	border: 1px solid #e0e0e0;
 	border-radius: 10px;
-	padding: 10px;
-	margin: 10px 0;
-	max-width: 250px;
+	width: 30%;
+	max-width: 300px;
+	min-width: 200px;
 	cursor: pointer;
+
+	h3,
+	p {
+		margin: 10px;
+	}
+
+	.filters {
+		display: none;
+		margin-top: 5px;
+		padding: 10px;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		background-color: white;
+		cursor: default;
+
+		select {
+			display: block;
+		}
+	}
 }
 
 .property-block.selected {
 	background-color: #a6e66f;
+	border: 5px solid #a6e66f;
+
+	h3,
+	p {
+		margin: 5px;
+	}
+
+	.filters {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
 }

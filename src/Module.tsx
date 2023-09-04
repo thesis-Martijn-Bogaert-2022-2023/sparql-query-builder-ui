@@ -12,6 +12,7 @@ interface ModuleProps {
 	onPrefixesLoaded: (modulePrefixes: Prefixes) => void;
 	onPropertySelect: (selectedProperty: SelectedProperty) => void;
 	onPropertyDeselect: (fileName: string, propertyName: string) => void;
+	onPropertyUpdate: (selectedProperty: SelectedProperty) => void;
 }
 
 const Module: React.FC<ModuleProps> = ({
@@ -20,6 +21,7 @@ const Module: React.FC<ModuleProps> = ({
 	onPrefixesLoaded,
 	onPropertySelect,
 	onPropertyDeselect,
+	onPropertyUpdate,
 }) => {
 	const [properties, setProperties] = useState<Properties | null>(null);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -43,6 +45,10 @@ const Module: React.FC<ModuleProps> = ({
 		onPropertyDeselect(fileName, propertyName);
 	};
 
+	const handlePropertyUpdate = (selectedProperty: SelectedProperty) => {
+		onPropertyUpdate(selectedProperty);
+	};
+
 	return (
 		<>
 			<div className="module-header" onClick={handleFileClick}>
@@ -63,6 +69,7 @@ const Module: React.FC<ModuleProps> = ({
 								propertyDetails={propertyData}
 								onSelect={handlePropertySelect}
 								onDeselect={handlePropertyDeselect}
+								onUpdate={handlePropertyUpdate}
 							/>
 						))}
 				</div>

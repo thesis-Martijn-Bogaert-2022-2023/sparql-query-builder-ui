@@ -8,6 +8,11 @@ export interface Statement {
 export interface PropertyDetails {
 	statements: Statement[];
 	question?: string;
+	filters?: {
+		string?: string;
+		language?: string;
+	};
+	optional?: boolean;
 }
 
 export interface Properties {
