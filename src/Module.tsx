@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse } from 'react-collapse';
 import PropertyBlock from './PropertyBlock';
-import { JSONModule, Properties, Statement } from './types';
+import { JSONModule, Prefixes, Properties, Statement } from './types';
 import plusIcon from './assets/plus.svg';
 import minusIcon from './assets/minus.svg';
 import './styles/Module.scss';
@@ -9,6 +9,7 @@ import './styles/Module.scss';
 interface ModuleProps {
 	filePath: string;
 	importFn: () => Promise<{ default: JSONModule }>;
+	onPrefixesLoaded: (modulePrefixes: Prefixes) => void;
 	onPropertySelect: (propertyData: Properties) => void;
 	onPropertyDeselect: (propertyName: string) => void;
 }
@@ -16,6 +17,7 @@ interface ModuleProps {
 const Module: React.FC<ModuleProps> = ({
 	filePath,
 	importFn,
+	onPrefixesLoaded,
 	onPropertySelect,
 	onPropertyDeselect,
 }) => {
@@ -28,6 +30,7 @@ const Module: React.FC<ModuleProps> = ({
 		if (!properties) {
 			const module = await importFn();
 			setProperties(module.default.properties);
+			if (module.default.prefixes) onPrefixesLoaded(module.default.prefixes);
 		}
 		setIsOpen(!isOpen);
 	};

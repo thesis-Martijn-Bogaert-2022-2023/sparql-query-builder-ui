@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Module from './Module';
 import CodeDisplay from './CodeDisplay';
-import { JSONModule, Properties } from './types';
+import { JSONModule, Properties, Prefixes } from './types';
 import './styles/App.scss';
 
 const App: React.FC = () => {
 	const modules = import.meta.glob('./config/*.json');
 	const [selectedProperties, setSelectedProperties] = useState<Properties>({});
+	const [prefixes, setPrefixes] = useState<Prefixes>({});
 
 	return (
 		<div className="container">
@@ -16,6 +17,9 @@ const App: React.FC = () => {
 						key={filePath}
 						filePath={filePath}
 						importFn={importFn as () => Promise<{ default: JSONModule }>}
+						onPrefixesLoaded={(modulePrefixes) => {
+							setPrefixes((prev) => ({ ...prev, ...modulePrefixes }));
+						}}
 						onPropertySelect={(propertyData) => {
 							setSelectedProperties((prev) => ({
 								...prev,
@@ -32,7 +36,10 @@ const App: React.FC = () => {
 					/>
 				))}
 			</div>
-			<CodeDisplay selectedProperties={selectedProperties} />
+			<CodeDisplay
+				selectedProperties={selectedProperties}
+				prefixes={prefixes}
+			/>
 		</div>
 	);
 };

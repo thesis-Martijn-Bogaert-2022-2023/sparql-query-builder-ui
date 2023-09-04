@@ -4,22 +4,26 @@ import 'prismjs/themes/prism.css';
 import 'prismjs/components/prism-turtle';
 import 'prismjs/components/prism-sparql';
 import { buildQuery } from 'sparql-query-builder';
-import { Properties } from './types';
+import { Prefixes, Properties } from './types';
 import copy from 'copy-text-to-clipboard';
 import copyIcon from './assets/copy.svg';
 import './styles/CodeDisplay.scss';
 
 interface CodeDisplayProps {
 	selectedProperties: Properties;
+	prefixes: Prefixes;
 }
 
-const CodeDisplay: React.FC<CodeDisplayProps> = ({ selectedProperties }) => {
+const CodeDisplay: React.FC<CodeDisplayProps> = ({
+	selectedProperties,
+	prefixes,
+}) => {
 	const [sparqlQuery, setSparqlQuery] = useState<string>('');
 	const [highlightedCode, setHighlightedCode] = useState<string>('');
 
 	useEffect(() => {
 		if (Object.keys(selectedProperties).length > 0) {
-			const query = buildQuery(selectedProperties);
+			const query = buildQuery(selectedProperties, prefixes);
 			setSparqlQuery(query);
 
 			const highlighted = Prism.highlight(
@@ -32,7 +36,7 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ selectedProperties }) => {
 			setSparqlQuery('');
 			setHighlightedCode('');
 		}
-	}, [selectedProperties]);
+	}, [selectedProperties, prefixes]);
 
 	return (
 		<div>
