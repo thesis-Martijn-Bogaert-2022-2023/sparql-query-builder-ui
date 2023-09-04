@@ -1,34 +1,22 @@
-import { useState } from 'react';
-import { Properties, Statement } from './types';
+import React, { useState, useEffect } from 'react';
 import Module from './Module';
+import { Properties } from './types';
+import { buildQuery } from 'sparql-query-builder';
 import './styles/App.scss';
-
-interface SelectedProperty {
-	id: string;
-	name: string;
-	statements: Statement[];
-}
 
 const App: React.FC = () => {
 	const modules = import.meta.glob('./config/*.json');
-	const [selectedProperties, setSelectedProperties] = useState<
-		SelectedProperty[]
-	>([]);
+	const [selectedProperties, setSelectedProperties] = useState<Properties>({});
+	const [generatedQuery, setGeneratedQuery] = useState<string>('');
 
-	const addProperty = (
-		id: string,
-		propertyName: string,
-		statements: Statement[]
-	) => {
-		setSelectedProperties((prev) => [
-			...prev,
-			{ id, name: propertyName, statements },
-		]);
-	};
-
-	const removeProperty = (id: string) => {
-		setSelectedProperties((prev) => prev.filter((prop) => prop.id !== id));
-	};
+	useEffect(() => {
+		if (Object.keys(selectedProperties).length > 0) {
+			const query = buildQuery(selectedProperties);
+			setGeneratedQuery(query);
+		} else {
+			setGeneratedQuery('');
+		}
+	}, [selectedProperties]);
 
 	return (
 		<div className="container">
@@ -38,19 +26,28 @@ const App: React.FC = () => {
 						key={filePath}
 						filePath={filePath}
 						importFn={importFn as () => Promise<{ default: Properties }>}
-						onPropertyAdd={addProperty}
-						onPropertyRemove={removeProperty}
+						onPropertySelect={(propertyData) => {
+							setSelectedProperties((prev) => ({
+								...prev,
+								...propertyData,
+							}));
+						}}
+						onPropertyDeselect={(propertyName) => {
+							setSelectedProperties((prev) => {
+								const updated = { ...prev };
+								delete updated[propertyName];
+								return updated;
+							});
+						}}
 					/>
 				))}
 			</div>
 			<div>
-				{selectedProperties.length === 0 ? (
-					<span>No properties selected yet</span>
-				) : (
-					<span>
-						Number of properties selected: {selectedProperties.length}
-					</span>
-				)}
+				<span>
+					Number of properties selected:{' '}
+					{Object.keys(selectedProperties).length}
+				</span>
+				{generatedQuery && <pre>{generatedQuery}</pre>}
 			</div>
 		</div>
 	);

@@ -5,11 +5,11 @@ export interface Statement {
 	object_variable_name?: string;
 }
 
-export interface PropertyData {
+export interface PropertyDetails {
 	statements: Statement[];
 	question?: string;
 }
 
 export interface Properties {
-	[key: string]: PropertyData;
+	[propertyName: string]: PropertyDetails;
 }

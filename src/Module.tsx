@@ -9,19 +9,15 @@ import './styles/Module.scss';
 interface ModuleProps {
 	filePath: string;
 	importFn: () => Promise<{ default: Properties }>;
-	onPropertyAdd: (
-		id: string,
-		propertyName: string,
-		statements: Statement[]
-	) => void;
-	onPropertyRemove: (id: string) => void;
+	onPropertySelect: (propertyData: Properties) => void;
+	onPropertyDeselect: (propertyName: string) => void;
 }
 
 const Module: React.FC<ModuleProps> = ({
 	filePath,
 	importFn,
-	onPropertyAdd,
-	onPropertyRemove,
+	onPropertySelect,
+	onPropertyDeselect,
 }) => {
 	const [properties, setProperties] = useState<Properties | null>(null);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -36,14 +32,16 @@ const Module: React.FC<ModuleProps> = ({
 		setIsOpen(!isOpen);
 	};
 
-	const handlePropertyAdd = (propertyName: string, statements: Statement[]) => {
-		const id = `${fileName}-${propertyName}`;
-		onPropertyAdd(id, propertyName, statements);
+	const handlePropertySelect = (
+		propertyName: string,
+		statements: Statement[]
+	) => {
+		const selectedProperty: Properties = { [propertyName]: { statements } };
+		onPropertySelect(selectedProperty);
 	};
 
-	const handlePropertyRemove = (propertyName: string) => {
-		const id = `${fileName}-${propertyName}`;
-		onPropertyRemove(id);
+	const handlePropertyDeselect = (propertyName: string) => {
+		onPropertyDeselect(propertyName);
 	};
 
 	return (
@@ -63,8 +61,8 @@ const Module: React.FC<ModuleProps> = ({
 								key={propertyName}
 								propertyName={propertyName}
 								propertyData={propertyData}
-								onAdd={handlePropertyAdd}
-								onRemove={handlePropertyRemove}
+								onSelect={handlePropertySelect}
+								onDeselect={handlePropertyDeselect}
 							/>
 						))}
 				</div>
