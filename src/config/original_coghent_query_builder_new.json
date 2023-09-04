@@ -1,0 +1,170 @@
+{
+	"prefixes": {
+		"cidoc": "http://www.cidoc-crm.org/cidoc-crm/",
+		"adms": "http://www.w3.org/ns/adms#",
+		"skos": "http://www.w3.org/2004/02/skos/core#",
+		"la": "https://linked.art/ns/terms/"
+	},
+	"properties": {
+		"title": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P102_has_title"
+				}
+			]
+		},
+		"description": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P3_has_note"
+				}
+			]
+		},
+		"image": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				}
+			]
+		},
+		"objectname": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P41i_was_classified_by"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P42_assigned"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel"
+				}
+			]
+		},
+		"association": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P128_carries"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P129_is_about"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P2_has_type"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel"
+				}
+			]
+		},
+		"objectnumber": {
+			"statements": [
+				{
+					"prefix": "adms",
+					"predicate": "identifier"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "notation"
+				}
+			]
+		},
+		"creator": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P108i_was_produced_by"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P14_carried_out_by"
+				},
+				{
+					"prefix": "la",
+					"predicate": "equivalent"
+				},
+				{
+					"prefix": "rdfs",
+					"predicate": "label"
+				}
+			]
+		},
+		"place": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P108i_was_produced_by"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P7_took_place_at"
+				},
+				{
+					"prefix": "la",
+					"predicate": "equivalent"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel"
+				}
+			]
+		},
+		"date": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P108i_was_produced_by"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P4_has_time-span"
+				}
+			]
+		},
+		"technique": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P108i_was_produced_by"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P32_used_general_technique"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P2_has_type"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel"
+				}
+			]
+		},
+		"material": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P45_consists_of"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P2_has_type"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel"
+				}
+			]
+		}
+	}
+}

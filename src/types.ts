@@ -13,3 +13,12 @@ export interface PropertyDetails {
 export interface Properties {
 	[propertyName: string]: PropertyDetails;
 }
+
+export interface Prefixes {
+	[prefixName: string]: string;
+}
+
+export interface JSONModule {
+	prefixes?: Prefixes;
+	properties: Properties;
+}

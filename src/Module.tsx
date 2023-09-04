@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Collapse } from 'react-collapse';
 import PropertyBlock from './PropertyBlock';
-import { Properties, Statement } from './types';
+import { JSONModule, Properties, Statement } from './types';
 import plusIcon from './assets/plus.svg';
 import minusIcon from './assets/minus.svg';
 import './styles/Module.scss';
 
 interface ModuleProps {
 	filePath: string;
-	importFn: () => Promise<{ default: Properties }>;
+	importFn: () => Promise<{ default: JSONModule }>;
 	onPropertySelect: (propertyData: Properties) => void;
 	onPropertyDeselect: (propertyName: string) => void;
 }
@@ -27,7 +27,7 @@ const Module: React.FC<ModuleProps> = ({
 	const handleFileClick = async () => {
 		if (!properties) {
 			const module = await importFn();
-			setProperties(module.default);
+			setProperties(module.default.properties);
 		}
 		setIsOpen(!isOpen);
 	};

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Module from './Module';
 import CodeDisplay from './CodeDisplay';
-import { Properties } from './types';
+import { JSONModule, Properties } from './types';
 import './styles/App.scss';
 
 const App: React.FC = () => {
@@ -15,7 +15,7 @@ const App: React.FC = () => {
 					<Module
 						key={filePath}
 						filePath={filePath}
-						importFn={importFn as () => Promise<{ default: Properties }>}
+						importFn={importFn as () => Promise<{ default: JSONModule }>}
 						onPropertySelect={(propertyData) => {
 							setSelectedProperties((prev) => ({
 								...prev,

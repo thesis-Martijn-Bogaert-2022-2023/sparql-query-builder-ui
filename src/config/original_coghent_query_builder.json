@@ -1,0 +1,199 @@
+{
+	"prefixes": {
+		"cidoc": "http://www.cidoc-crm.org/cidoc-crm/",
+		"adms": "http://www.w3.org/ns/adms#",
+		"skos": "http://www.w3.org/2004/02/skos/core#",
+		"la": "https://linked.art/ns/terms/"
+	},
+	"properties": {
+		"title": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P102_has_title",
+					"object_variable_name": "title"
+				}
+			]
+		},
+		"description": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P3_has_note",
+					"object_variable_name": "note"
+				}
+			]
+		},
+		"image": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of",
+					"object_variable_name": "image"
+				}
+			]
+		},
+		"objectname": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P41i_was_classified_by",
+					"object_variable_name": "classified"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P42_assigned",
+					"object_variable_name": "assigned"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel",
+					"object_variable_name": "objectname"
+				}
+			]
+		},
+		"association": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P128_carries",
+					"object_variable_name": "carries"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P129_is_about",
+					"object_variable_name": "about"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P2_has_type",
+					"object_variable_name": "type"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel",
+					"object_variable_name": "associatie"
+				}
+			]
+		},
+		"objectnumber": {
+			"statements": [
+				{
+					"prefix": "adms",
+					"predicate": "identifier",
+					"object_variable_name": "identifier"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "notation",
+					"object_variable_name": "objectnumber"
+				}
+			]
+		},
+		"creator": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P108i_was_produced_by",
+					"object_variable_name": "production"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P14_carried_out_by",
+					"object_variable_name": "producer"
+				},
+				{
+					"prefix": "la",
+					"predicate": "equivalent",
+					"object_variable_name": "equivalent"
+				},
+				{
+					"prefix": "rdfs",
+					"predicate": "label",
+					"object_variable_name": "creator"
+				}
+			]
+		},
+		"place": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P108i_was_produced_by",
+					"object_variable_name": "produced"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P7_took_place_at",
+					"object_variable_name": "tookplace"
+				},
+				{
+					"prefix": "la",
+					"predicate": "equivalent",
+					"object_variable_name": "plaatsequivalent"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel",
+					"object_variable_name": "plaats"
+				}
+			]
+		},
+		"date": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P108i_was_produced_by",
+					"object_variable_name": "produced"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P4_has_time-span",
+					"object_variable_name": "timespan"
+				}
+			]
+		},
+		"technique": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P108i_was_produced_by",
+					"object_variable_name": "produced"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P32_used_general_technique",
+					"object_variable_name": "technique"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P2_has_type",
+					"object_variable_name": "hastype"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel",
+					"object_variable_name": "techniek"
+				}
+			]
+		},
+		"material": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P45_consists_of",
+					"object_variable_name": "consists"
+				},
+				{
+					"prefix": "cidoc",
+					"predicate": "P2_has_type",
+					"object_variable_name": "materiaaltype"
+				},
+				{
+					"prefix": "skos",
+					"predicate": "prefLabel",
+					"object_variable_name": "materiaal"
+				}
+			]
+		}
+	}
+}
