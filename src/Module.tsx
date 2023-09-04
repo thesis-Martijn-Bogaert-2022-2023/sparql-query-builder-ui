@@ -46,7 +46,7 @@ const Module: React.FC<ModuleProps> = ({
 	return (
 		<>
 			<div className="module-header" onClick={handleFileClick}>
-				<span className="module-name">{fileName}</span>
+				<span className="module-name">{fileName.replaceAll('_', ' ')}</span>
 				<img
 					src={isOpen ? minusIcon : plusIcon}
 					alt={isOpen ? 'Collapse' : 'Expand'}
