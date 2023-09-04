@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse } from 'react-collapse';
 import PropertyBlock from './PropertyBlock';
-import { Properties } from './types';
+import { Properties, Statement } from './types';
 import plusIcon from './assets/plus.svg';
 import minusIcon from './assets/minus.svg';
 import './styles/Module.scss';
@@ -9,11 +9,24 @@ import './styles/Module.scss';
 interface ModuleProps {
 	filePath: string;
 	importFn: () => Promise<{ default: Properties }>;
+	onPropertyAdd: (
+		id: string,
+		propertyName: string,
+		statements: Statement[]
+	) => void;
+	onPropertyRemove: (id: string) => void;
 }
 
-const Module: React.FC<ModuleProps> = ({ filePath, importFn }) => {
+const Module: React.FC<ModuleProps> = ({
+	filePath,
+	importFn,
+	onPropertyAdd,
+	onPropertyRemove,
+}) => {
 	const [properties, setProperties] = useState<Properties | null>(null);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+
+	const fileName = filePath.split('/').pop()?.split('.')[0] || '';
 
 	const handleFileClick = async () => {
 		if (!properties) {
@@ -23,7 +36,15 @@ const Module: React.FC<ModuleProps> = ({ filePath, importFn }) => {
 		setIsOpen(!isOpen);
 	};
 
-	const fileName = filePath.split('/').pop();
+	const handlePropertyAdd = (propertyName: string, statements: Statement[]) => {
+		const id = `${fileName}-${propertyName}`;
+		onPropertyAdd(id, propertyName, statements);
+	};
+
+	const handlePropertyRemove = (propertyName: string) => {
+		const id = `${fileName}-${propertyName}`;
+		onPropertyRemove(id);
+	};
 
 	return (
 		<>
@@ -42,6 +63,8 @@ const Module: React.FC<ModuleProps> = ({ filePath, importFn }) => {
 								key={propertyName}
 								propertyName={propertyName}
 								propertyData={propertyData}
+								onAdd={handlePropertyAdd}
+								onRemove={handlePropertyRemove}
 							/>
 						))}
 				</div>
