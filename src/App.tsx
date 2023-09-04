@@ -10,37 +10,44 @@ const App: React.FC = () => {
 	const [prefixes, setPrefixes] = useState<Prefixes>({});
 
 	return (
-		<div className="container">
-			<div>
-				{Object.entries(modules).map(([filePath, importFn]) => (
-					<Module
-						key={filePath}
-						filePath={filePath}
-						importFn={importFn as () => Promise<{ default: JSONModule }>}
-						onPrefixesLoaded={(modulePrefixes) => {
-							setPrefixes((prev) => ({ ...prev, ...modulePrefixes }));
-						}}
-						onPropertySelect={(propertyData) => {
-							setSelectedProperties((prev) => ({
-								...prev,
-								...propertyData,
-							}));
-						}}
-						onPropertyDeselect={(propertyName) => {
-							setSelectedProperties((prev) => {
-								const updated = { ...prev };
-								delete updated[propertyName];
-								return updated;
-							});
-						}}
+		<>
+			<h1>SPARQL Query Builder</h1>
+			<div className="container">
+				<div>
+					<h2>Select Properties</h2>
+					{Object.entries(modules).map(([filePath, importFn]) => (
+						<Module
+							key={filePath}
+							filePath={filePath}
+							importFn={importFn as () => Promise<{ default: JSONModule }>}
+							onPrefixesLoaded={(modulePrefixes) => {
+								setPrefixes((prev) => ({ ...prev, ...modulePrefixes }));
+							}}
+							onPropertySelect={(propertyData) => {
+								setSelectedProperties((prev) => ({
+									...prev,
+									...propertyData,
+								}));
+							}}
+							onPropertyDeselect={(propertyName) => {
+								setSelectedProperties((prev) => {
+									const updated = { ...prev };
+									delete updated[propertyName];
+									return updated;
+								});
+							}}
+						/>
+					))}
+				</div>
+				<div>
+					<h2>Query</h2>
+					<CodeDisplay
+						selectedProperties={selectedProperties}
+						prefixes={prefixes}
 					/>
-				))}
+				</div>
 			</div>
-			<CodeDisplay
-				selectedProperties={selectedProperties}
-				prefixes={prefixes}
-			/>
-		</div>
+		</>
 	);
 };
 
