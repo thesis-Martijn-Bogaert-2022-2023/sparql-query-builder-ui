@@ -38,23 +38,29 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 		}
 	}, [selectedProperties, prefixes]);
 
+	const propertiesCount = Object.keys(selectedProperties).length;
+
 	return (
 		<div>
-			<span>
-				Number of properties selected: {Object.keys(selectedProperties).length}
-			</span>
-			<pre>
-				<img
-					src={copyIcon}
-					alt="Copy code"
-					className="copy-icon"
-					onClick={() => copy(sparqlQuery)}
-				/>
-				<code
-					id="codeBlock"
-					dangerouslySetInnerHTML={{ __html: highlightedCode }}
-				/>
-			</pre>
+			{propertiesCount > 0 ? (
+				<>
+					<span>Number of properties selected: {propertiesCount}</span>
+					<pre>
+						<img
+							src={copyIcon}
+							alt="Copy code"
+							className="copy-icon"
+							onClick={() => copy(sparqlQuery)}
+						/>
+						<code
+							id="codeBlock"
+							dangerouslySetInnerHTML={{ __html: highlightedCode }}
+						/>
+					</pre>
+				</>
+			) : (
+				<span>No properties selected</span>
+			)}
 		</div>
 	);
 };
