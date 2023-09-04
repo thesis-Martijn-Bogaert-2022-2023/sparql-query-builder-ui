@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Module from './Module';
+import CodeDisplay from './CodeDisplay';
 import { Properties } from './types';
-import { buildQuery } from 'sparql-query-builder';
 import './styles/App.scss';
 
 const App: React.FC = () => {
 	const modules = import.meta.glob('./config/*.json');
 	const [selectedProperties, setSelectedProperties] = useState<Properties>({});
-	const [generatedQuery, setGeneratedQuery] = useState<string>('');
-
-	useEffect(() => {
-		if (Object.keys(selectedProperties).length > 0) {
-			const query = buildQuery(selectedProperties);
-			setGeneratedQuery(query);
-		} else {
-			setGeneratedQuery('');
-		}
-	}, [selectedProperties]);
 
 	return (
 		<div className="container">
@@ -42,13 +32,7 @@ const App: React.FC = () => {
 					/>
 				))}
 			</div>
-			<div>
-				<span>
-					Number of properties selected:{' '}
-					{Object.keys(selectedProperties).length}
-				</span>
-				{generatedQuery && <pre>{generatedQuery}</pre>}
-			</div>
+			<CodeDisplay selectedProperties={selectedProperties} />
 		</div>
 	);
 };
