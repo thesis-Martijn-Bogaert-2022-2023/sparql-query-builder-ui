@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "copy-text-to-clipboard": "^3.2.0",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-collapse": "^5.1.1",
