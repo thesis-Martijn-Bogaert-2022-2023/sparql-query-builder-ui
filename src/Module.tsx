@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Collapse } from 'react-collapse';
 import PropertyBlock from './PropertyBlock';
-import { JSONModule, Prefixes, Properties, Statement } from './types';
+import { JSONModule, Prefixes, Properties, SelectedProperty } from './types';
 import plusIcon from './assets/plus.svg';
 import minusIcon from './assets/minus.svg';
 import './styles/Module.scss';
@@ -10,8 +10,8 @@ interface ModuleProps {
 	filePath: string;
 	importFn: () => Promise<{ default: JSONModule }>;
 	onPrefixesLoaded: (modulePrefixes: Prefixes) => void;
-	onPropertySelect: (propertyData: Properties) => void;
-	onPropertyDeselect: (propertyName: string) => void;
+	onPropertySelect: (selectedProperty: SelectedProperty) => void;
+	onPropertyDeselect: (fileName: string, propertyName: string) => void;
 }
 
 const Module: React.FC<ModuleProps> = ({
@@ -35,16 +35,12 @@ const Module: React.FC<ModuleProps> = ({
 		setIsOpen(!isOpen);
 	};
 
-	const handlePropertySelect = (
-		propertyName: string,
-		statements: Statement[]
-	) => {
-		const selectedProperty: Properties = { [propertyName]: { statements } };
+	const handlePropertySelect = (selectedProperty: SelectedProperty) => {
 		onPropertySelect(selectedProperty);
 	};
 
-	const handlePropertyDeselect = (propertyName: string) => {
-		onPropertyDeselect(propertyName);
+	const handlePropertyDeselect = (fileName: string, propertyName: string) => {
+		onPropertyDeselect(fileName, propertyName);
 	};
 
 	return (
@@ -62,8 +58,9 @@ const Module: React.FC<ModuleProps> = ({
 						Object.entries(properties).map(([propertyName, propertyData]) => (
 							<PropertyBlock
 								key={propertyName}
+								fileName={fileName}
 								propertyName={propertyName}
-								propertyData={propertyData}
+								propertyDetails={propertyData}
 								onSelect={handlePropertySelect}
 								onDeselect={handlePropertyDeselect}
 							/>

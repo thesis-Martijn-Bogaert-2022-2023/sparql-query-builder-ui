@@ -22,3 +22,9 @@ export interface JSONModule {
 	prefixes?: Prefixes;
 	properties: Properties;
 }
+
+export interface SelectedProperty {
+	fileName: string;
+	propertyName: string;
+	propertyDetails: PropertyDetails;
+}

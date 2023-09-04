@@ -4,13 +4,13 @@ import 'prismjs/themes/prism.css';
 import 'prismjs/components/prism-turtle';
 import 'prismjs/components/prism-sparql';
 import { buildQuery } from 'sparql-query-builder';
-import { Prefixes, Properties } from './types';
+import { Prefixes, Properties, SelectedProperty } from './types';
 import copy from 'copy-text-to-clipboard';
 import copyIcon from './assets/copy.svg';
 import './styles/CodeDisplay.scss';
 
 interface CodeDisplayProps {
-	selectedProperties: Properties;
+	selectedProperties: SelectedProperty[];
 	prefixes: Prefixes;
 }
 
@@ -22,8 +22,28 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 	const [highlightedCode, setHighlightedCode] = useState<string>('');
 
 	useEffect(() => {
-		if (Object.keys(selectedProperties).length > 0) {
-			const query = buildQuery(selectedProperties, prefixes);
+		const propertiesObject: Properties = selectedProperties.reduce(
+			(acc, curr) => {
+				// Check if the property name already exists in the accumulator
+				const existingProperty = selectedProperties.find(
+					(prop) =>
+						prop.propertyName === curr.propertyName &&
+						prop.fileName !== curr.fileName
+				);
+
+				// If it exists, use a combination of fileName and propertyName, otherwise just use propertyName
+				const key = existingProperty
+					? `${curr.propertyName}_${curr.fileName}`
+					: curr.propertyName;
+
+				acc[key] = curr.propertyDetails;
+				return acc;
+			},
+			{} as Properties
+		);
+
+		if (Object.keys(propertiesObject).length > 0) {
+			const query = buildQuery(propertiesObject, prefixes);
 			setSparqlQuery(query);
 
 			const highlighted = Prism.highlight(
@@ -38,7 +58,7 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 		}
 	}, [selectedProperties, prefixes]);
 
-	const propertiesCount = Object.keys(selectedProperties).length;
+	const propertiesCount = selectedProperties.length;
 
 	return (
 		<div>

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { PropertyDetails, Statement } from './types';
+import { SelectedProperty, PropertyDetails } from './types';
 import './styles/PropertyBlock.scss';
 
 interface PropertyBlockProps {
+	fileName: string;
 	propertyName: string;
-	propertyData: PropertyDetails;
-	onSelect: (propertyName: string, statements: Statement[]) => void;
-	onDeselect: (propertyName: string) => void;
+	propertyDetails: PropertyDetails;
+	onSelect: (selectedProperty: SelectedProperty) => void;
+	onDeselect: (fileName: string, propertyName: string) => void;
 }
 
 const PropertyBlock: React.FC<PropertyBlockProps> = ({
+	fileName,
 	propertyName,
-	propertyData,
+	propertyDetails,
 	onSelect,
 	onDeselect,
 }) => {
@@ -19,9 +21,9 @@ const PropertyBlock: React.FC<PropertyBlockProps> = ({
 
 	const handleToggle = () => {
 		if (isSelected) {
-			onDeselect(propertyName);
+			onDeselect(fileName, propertyName);
 		} else {
-			onSelect(propertyName, propertyData.statements);
+			onSelect({ fileName, propertyName, propertyDetails });
 		}
 		setIsSelected(!isSelected);
 	};
@@ -32,7 +34,7 @@ const PropertyBlock: React.FC<PropertyBlockProps> = ({
 			className={`property-block ${isSelected ? 'selected' : ''}`}
 		>
 			<h3>{propertyName}</h3>
-			{propertyData.question && <p>{propertyData.question}</p>}
+			{propertyDetails.question && <p>{propertyDetails.question}</p>}
 		</div>
 	);
 };

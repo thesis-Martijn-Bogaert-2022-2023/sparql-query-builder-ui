@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
 import Module from './Module';
 import CodeDisplay from './CodeDisplay';
-import { JSONModule, Properties, Prefixes } from './types';
+import { JSONModule, Prefixes, SelectedProperty } from './types';
 import './styles/App.scss';
 
 const App: React.FC = () => {
 	const modules = import.meta.glob('./config/*.json');
-	const [selectedProperties, setSelectedProperties] = useState<Properties>({});
+	const [selectedProperties, setSelectedProperties] = useState<
+		SelectedProperty[]
+	>([]);
 	const [prefixes, setPrefixes] = useState<Prefixes>({});
+
+	const handlePrefixesLoaded = (modulePrefixes: Prefixes) => {
+		setPrefixes((prev) => ({ ...prev, ...modulePrefixes }));
+	};
+
+	const handlePropertySelect = (selectedProperty: SelectedProperty) => {
+		setSelectedProperties((prev) => [...prev, selectedProperty]);
+	};
+
+	const handlePropertyDeselect = (fileName: string, propertyName: string) => {
+		setSelectedProperties((prev) =>
+			prev.filter(
+				(prop) =>
+					!(prop.propertyName === propertyName && prop.fileName === fileName)
+			)
+		);
+	};
 
 	return (
 		<>
@@ -20,22 +39,9 @@ const App: React.FC = () => {
 							key={filePath}
 							filePath={filePath}
 							importFn={importFn as () => Promise<{ default: JSONModule }>}
-							onPrefixesLoaded={(modulePrefixes) => {
-								setPrefixes((prev) => ({ ...prev, ...modulePrefixes }));
-							}}
-							onPropertySelect={(propertyData) => {
-								setSelectedProperties((prev) => ({
-									...prev,
-									...propertyData,
-								}));
-							}}
-							onPropertyDeselect={(propertyName) => {
-								setSelectedProperties((prev) => {
-									const updated = { ...prev };
-									delete updated[propertyName];
-									return updated;
-								});
-							}}
+							onPrefixesLoaded={handlePrefixesLoaded}
+							onPropertySelect={handlePropertySelect}
+							onPropertyDeselect={handlePropertyDeselect}
 						/>
 					))}
 				</div>
