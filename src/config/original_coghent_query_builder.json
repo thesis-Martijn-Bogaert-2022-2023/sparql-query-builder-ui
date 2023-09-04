@@ -6,7 +6,7 @@
 		"la": "https://linked.art/ns/terms/"
 	},
 	"properties": {
-		"title": {
+		"Title": {
 			"statements": [
 				{
 					"prefix": "cidoc",
@@ -15,7 +15,7 @@
 				}
 			]
 		},
-		"description": {
+		"Description": {
 			"statements": [
 				{
 					"prefix": "cidoc",
@@ -24,7 +24,7 @@
 				}
 			]
 		},
-		"image": {
+		"Image": {
 			"statements": [
 				{
 					"prefix": "cidoc",
@@ -33,7 +33,7 @@
 				}
 			]
 		},
-		"objectname": {
+		"Objectname": {
 			"statements": [
 				{
 					"prefix": "cidoc",
@@ -52,7 +52,7 @@
 				}
 			]
 		},
-		"association": {
+		"Association": {
 			"statements": [
 				{
 					"prefix": "cidoc",
@@ -76,7 +76,7 @@
 				}
 			]
 		},
-		"objectnumber": {
+		"Objectnumber": {
 			"statements": [
 				{
 					"prefix": "adms",
@@ -90,7 +90,7 @@
 				}
 			]
 		},
-		"creator": {
+		"Creator": {
 			"statements": [
 				{
 					"prefix": "cidoc",
@@ -114,7 +114,7 @@
 				}
 			]
 		},
-		"place": {
+		"Place": {
 			"statements": [
 				{
 					"prefix": "cidoc",
@@ -138,7 +138,7 @@
 				}
 			]
 		},
-		"date": {
+		"Date": {
 			"statements": [
 				{
 					"prefix": "cidoc",
@@ -152,7 +152,7 @@
 				}
 			]
 		},
-		"technique": {
+		"Techniek": {
 			"statements": [
 				{
 					"prefix": "cidoc",
@@ -176,7 +176,7 @@
 				}
 			]
 		},
-		"material": {
+		"Materiaal": {
 			"statements": [
 				{
 					"prefix": "cidoc",
