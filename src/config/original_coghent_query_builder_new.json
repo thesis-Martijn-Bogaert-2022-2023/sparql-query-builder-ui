@@ -12,7 +12,8 @@
 					"prefix": "cidoc",
 					"predicate": "P102_has_title"
 				}
-			]
+			],
+			"question": "What is the Human-Made Object called?"
 		},
 		"Description": {
 			"statements": [
@@ -20,7 +21,8 @@
 					"prefix": "cidoc",
 					"predicate": "P3_has_note"
 				}
-			]
+			],
+			"question": "How can the Human-Made Object be described?"
 		},
 		"Image": {
 			"statements": [
@@ -28,7 +30,8 @@
 					"prefix": "cidoc",
 					"predicate": "P129i_is_subject_of"
 				}
-			]
+			],
+			"question": "What is the Human-Made Object's image URL?"
 		},
 		"Objectname": {
 			"statements": [
@@ -44,7 +47,8 @@
 					"prefix": "skos",
 					"predicate": "prefLabel"
 				}
-			]
+			],
+			"question": "What does the Human-Made Object represent?"
 		},
 		"Association": {
 			"statements": [
@@ -64,7 +68,8 @@
 					"prefix": "skos",
 					"predicate": "prefLabel"
 				}
-			]
+			],
+			"question": "Which CoGhent association has the Human-Made Object in its collection?"
 		},
 		"Objectnumber": {
 			"statements": [
@@ -96,7 +101,8 @@
 					"prefix": "rdfs",
 					"predicate": "label"
 				}
-			]
+			],
+			"question": "Who created the Human-Made Object?"
 		},
 		"Place": {
 			"statements": [
@@ -116,7 +122,8 @@
 					"prefix": "skos",
 					"predicate": "prefLabel"
 				}
-			]
+			],
+			"question": "Where was the Human-Made Object created?"
 		},
 		"Date": {
 			"statements": [
@@ -128,7 +135,8 @@
 					"prefix": "cidoc",
 					"predicate": "P4_has_time-span"
 				}
-			]
+			],
+			"question": "When was the Human-Made Object created?"
 		},
 		"Techniek": {
 			"statements": [
@@ -148,7 +156,8 @@
 					"prefix": "skos",
 					"predicate": "prefLabel"
 				}
-			]
+			],
+			"question": "Which technique was used to create the Human-Made Object?"
 		},
 		"Materiaal": {
 			"statements": [
@@ -164,7 +173,8 @@
 					"prefix": "skos",
 					"predicate": "prefLabel"
 				}
-			]
+			],
+			"question": "Which material was used to create the Human-Made Object?"
 		}
 	}
 }
