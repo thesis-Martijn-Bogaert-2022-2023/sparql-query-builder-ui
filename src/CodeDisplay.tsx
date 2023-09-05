@@ -9,6 +9,7 @@ import copy from 'copy-text-to-clipboard';
 import copyIcon from './assets/copy.svg';
 import './styles/CodeDisplay.scss';
 import { DebounceInput } from 'react-debounce-input';
+import QueryExecution from './QueryExecution';
 
 interface CodeDisplayProps {
 	selectedProperties: SelectedProperty[];
@@ -23,8 +24,9 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 	const [highlightedCode, setHighlightedCode] = useState<string>('');
 	const [limit, setLimit] = useState<number | null>(null);
 	const [offset, setOffset] = useState<number | null>(null);
+	const [uniquePredicates, setUniquePredicates] = useState<string[]>([]);
 
-	useEffect(() => {
+	const updateQuery = () => {
 		const propertiesObject: Properties = selectedProperties.reduce(
 			(acc, curr) => {
 				const existingProperty = selectedProperties.find(
@@ -41,27 +43,42 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 			{} as Properties
 		);
 
-		if (Object.keys(propertiesObject).length > 0) {
-			const query = buildQuery(
-				propertiesObject,
-				prefixes,
-				undefined,
-				limit && limit > 0 ? limit : undefined,
-				offset && offset > 0 ? offset : undefined
-			);
-			setSparqlQuery(query);
+		const query = buildQuery(
+			propertiesObject,
+			prefixes,
+			undefined,
+			limit && limit > 0 ? limit : undefined,
+			offset && offset > 0 ? offset : undefined
+		);
+		setSparqlQuery(query);
 
-			const highlighted = Prism.highlight(
-				query,
-				Prism.languages.sparql,
-				'sparql'
-			);
-			setHighlightedCode(highlighted);
-		} else {
-			setSparqlQuery('');
-			setHighlightedCode('');
-		}
-	}, [selectedProperties, prefixes, limit, offset]);
+		const highlighted = Prism.highlight(
+			query,
+			Prism.languages.sparql,
+			'sparql'
+		);
+		setHighlightedCode(highlighted);
+	};
+
+	useEffect(() => {
+		updateQuery();
+
+		const predicatesWithPrefixes = selectedProperties.flatMap((property) =>
+			property.propertyDetails.statements.map((statement) => {
+				const { predicate, prefix: prefixKey } = statement;
+				const prefixValue = prefixKey ? prefixes[prefixKey] : null;
+				return prefixValue ? prefixValue + predicate : predicate;
+			})
+		);
+
+		setUniquePredicates([...new Set(predicatesWithPrefixes)]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedProperties, prefixes]);
+
+	useEffect(() => {
+		updateQuery();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [limit, offset]);
 
 	const propertiesCount = selectedProperties.length;
 
@@ -104,6 +121,10 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 							dangerouslySetInnerHTML={{ __html: highlightedCode }}
 						/>
 					</pre>
+					<QueryExecution
+						sparqlQuery={sparqlQuery}
+						predicates={uniquePredicates}
+					/>
 				</>
 			) : (
 				<span className="counter">No properties selected</span>
