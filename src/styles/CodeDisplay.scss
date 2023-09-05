@@ -1,3 +1,17 @@
+.counter {
+	font-weight: bold;
+}
+
+.limit-offset {
+	margin-top: 10px;
+	display: flex;
+	gap: 10px;
+
+	input {
+		width: 4rem;
+	}
+}
+
 pre {
 	position: relative;
 

@@ -8,6 +8,7 @@ import { Prefixes, Properties, SelectedProperty } from './types';
 import copy from 'copy-text-to-clipboard';
 import copyIcon from './assets/copy.svg';
 import './styles/CodeDisplay.scss';
+import { DebounceInput } from 'react-debounce-input';
 
 interface CodeDisplayProps {
 	selectedProperties: SelectedProperty[];
@@ -20,22 +21,20 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 }) => {
 	const [sparqlQuery, setSparqlQuery] = useState<string>('');
 	const [highlightedCode, setHighlightedCode] = useState<string>('');
+	const [limit, setLimit] = useState<number | null>(null);
+	const [offset, setOffset] = useState<number | null>(null);
 
 	useEffect(() => {
 		const propertiesObject: Properties = selectedProperties.reduce(
 			(acc, curr) => {
-				// Check if the property name already exists in the accumulator
 				const existingProperty = selectedProperties.find(
 					(prop) =>
 						prop.propertyName === curr.propertyName &&
 						prop.fileName !== curr.fileName
 				);
-
-				// If it exists, use a combination of fileName and propertyName, otherwise just use propertyName
 				const key = existingProperty
 					? `${curr.propertyName}_${curr.fileName}`
 					: curr.propertyName;
-
 				acc[key] = curr.propertyDetails;
 				return acc;
 			},
@@ -43,7 +42,13 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 		);
 
 		if (Object.keys(propertiesObject).length > 0) {
-			const query = buildQuery(propertiesObject, prefixes);
+			const query = buildQuery(
+				propertiesObject,
+				prefixes,
+				undefined,
+				limit && limit > 0 ? limit : undefined,
+				offset && offset > 0 ? offset : undefined
+			);
 			setSparqlQuery(query);
 
 			const highlighted = Prism.highlight(
@@ -56,7 +61,7 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 			setSparqlQuery('');
 			setHighlightedCode('');
 		}
-	}, [selectedProperties, prefixes]);
+	}, [selectedProperties, prefixes, limit, offset]);
 
 	const propertiesCount = selectedProperties.length;
 
@@ -64,7 +69,29 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 		<div>
 			{propertiesCount > 0 ? (
 				<>
-					<span>Number of properties selected: {propertiesCount}</span>
+					<span className="counter">
+						Number of properties selected: {propertiesCount}
+					</span>
+					<div className="limit-offset">
+						<label htmlFor="limit">Limit:</label>
+						<DebounceInput
+							minLength={1}
+							debounceTimeout={300}
+							type="number"
+							id="limit"
+							value={limit || ''}
+							onChange={(e) => setLimit(Number(e.target.value))}
+						/>
+						<label htmlFor="offset">Offset:</label>
+						<DebounceInput
+							minLength={1}
+							debounceTimeout={300}
+							type="number"
+							id="offset"
+							value={offset || ''}
+							onChange={(e) => setOffset(Number(e.target.value))}
+						/>
+					</div>
 					<pre>
 						<img
 							src={copyIcon}
@@ -79,7 +106,7 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 					</pre>
 				</>
 			) : (
-				<span>No properties selected</span>
+				<span className="counter">No properties selected</span>
 			)}
 		</div>
 	);
