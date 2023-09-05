@@ -5,17 +5,17 @@ This React App (built using Vite) lets users select properties that translate to
 ## Installation
 1. The application depends on the [SPARQL Query Builder](https://github.com/thesis-Martijn-Bogaert-2022-2023/sparql-query-builder) application.
    1. Clone the repository:
-   ```bash
-   git clone https://github.com/thesis-Martijn-Bogaert-2022-2023/sparql-query-builder.git
-   ```
+      ```bash
+      git clone https://github.com/thesis-Martijn-Bogaert-2022-2023/sparql-query-builder.git
+      ```
    2. Navigate to its root and run:
-   ```bash
-   npm install
-   ```
+      ```bash
+      npm install
+      ```
    3. To use it as a local NPM package for the SPARQL Query Builder (UI) application, run:
-   ```bash
-   npm link
-   ```
+      ```bash
+      npm link
+      ```
 2. Clone **this** repository and navigate to its root:
 3. Run:
    ```bash
