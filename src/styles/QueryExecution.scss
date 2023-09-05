@@ -1,0 +1,16 @@
+textarea {
+	width: 100%;
+}
+
+.toggle-run-query {
+	display: flex;
+	gap: 10px;
+	justify-content: space-between;
+	align-items: center;
+
+	.toggle-label {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+}
