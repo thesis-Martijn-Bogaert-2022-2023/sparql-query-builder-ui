@@ -1,27 +1,27 @@
-# React + TypeScript + Vite
+# SPARQL Query Builder (UI)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This React App (built using Vite) lets users select properties that translate to statement(s) in a SPARQL query. The SPARQL query can subsequently be run using a *general* SPARQL query engine, or a SPARQL *Link-Traversal-based Query Processing* (LTQP) engine.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Installation
+1. The application depends on the [SPARQL Query Builder](https://github.com/thesis-Martijn-Bogaert-2022-2023/sparql-query-builder) application.
+   1. Clone the repository:
+   ```bash
+   git clone https://github.com/thesis-Martijn-Bogaert-2022-2023/sparql-query-builder.git
+   ```
+   2. Navigate to its root and run:
+   ```bash
+   npm install
+   ```
+   3. To use it as a local NPM package for the SPARQL Query Builder (UI) application, run:
+   ```bash
+   npm link
+   ```
+2. Clone **this** repository and navigate to its root:
+3. Run:
+   ```bash
+   npm install
+   ```
+4. (Optional) the previous command will automatically link the SPARQL Query Builder application, but it you want to be sure, run:
+   ```bash
+   npm link sparql-query-builder
+   ```
