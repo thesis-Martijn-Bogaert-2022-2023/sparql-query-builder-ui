@@ -16,7 +16,7 @@ This React App (built using Vite) lets users select properties that translate to
       ```bash
       npm link
       ```
-2. Clone **this** repository and navigate to its root:
+2. Clone **this** repository and navigate to its root.
 3. Run:
    ```bash
    npm install
