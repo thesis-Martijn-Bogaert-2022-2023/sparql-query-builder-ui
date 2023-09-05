@@ -6,6 +6,7 @@ import { iriIsValid } from './iri-validation';
 import { DebounceInput } from 'react-debounce-input';
 import { QueryEngine } from '@comunica/query-sparql';
 import { Bindings, IDataSource } from '@comunica/types';
+import BarLoader from 'react-spinners/BarLoader';
 
 interface QueryExecutionProps {
 	sparqlQuery: string;
@@ -21,6 +22,7 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 	const [queryResults, setQueryResults] = useState<
 		Array<Record<string, string>>
 	>([]);
+	const [loading, setLoading] = useState(false);
 
 	const handleDatasourcesChange = (datasourcesInput: string) => {
 		setDatasources(
@@ -38,6 +40,9 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 			alert('Not implemented yet!');
 		} else {
 			const queryEngine = new QueryEngine();
+
+			setLoading(true);
+
 			const bindingsStream = await queryEngine.queryBindings(sparqlQuery, {
 				sources: [...datasources] as [IDataSource, ...IDataSource[]],
 			});
@@ -52,11 +57,12 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 			});
 
 			bindingsStream.on('end', () => {
-				console.log('END');
+				setLoading(false);
 			});
 
 			bindingsStream.on('error', (error: Error) => {
 				console.error(error.message);
+				setLoading(false);
 			});
 		}
 	};
@@ -87,6 +93,9 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 				>
 					Run Query
 				</button>
+			</div>
+			<div className={`loader-container${loading ? ' loading' : ''}`}>
+				<BarLoader />
 			</div>
 			<div className="query-results">
 				{queryResults.map((result, index) => (
