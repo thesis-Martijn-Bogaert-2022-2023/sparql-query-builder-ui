@@ -19,7 +19,8 @@
 		"react-debounce-input": "^3.3.0",
 		"react-dom": "^18.2.0",
 		"react-toggle": "^4.1.3",
-		"reset-css": "^5.0.2"
+		"reset-css": "^5.0.2",
+		"validate-iri": "^1.0.1"
 	},
 	"devDependencies": {
 		"@types/node": "^20.5.8",

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 import './styles/QueryExecution.scss';
+import { iriIsValid } from './iri-validation';
+import { DebounceInput } from 'react-debounce-input';
 
 interface QueryExecutionProps {
 	sparqlQuery: string;
@@ -13,14 +15,25 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 	predicates,
 }) => {
 	const [useLinkTraversal, setUseLinkTraversal] = useState<boolean>(false);
-	const [inputValue, setInputValue] = useState<string>('');
+	const [datasources, setDatasources] = useState<string[]>([]);
+
+	const handleDatasourcesChange = (datasourcesInput: string) => {
+		setDatasources(
+			datasourcesInput
+				.split(',')
+				.map((datasource) => datasource.trim())
+				.filter((datasource) => iriIsValid(datasource))
+		);
+	};
 
 	return (
 		<>
-			<textarea
-				value={inputValue}
+			<DebounceInput
+				minLength={1}
+				debounceTimeout={300}
+				element="textarea"
 				placeholder="Enter datasource(s), seperate using comma's"
-				onChange={(e) => setInputValue(e.target.value)}
+				onChange={(e) => handleDatasourcesChange(e.target.value)}
 			/>
 			<div className="toggle-run-query">
 				<label className="toggle-label">
@@ -34,10 +47,11 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 					/>
 				</label>
 				<button
+					disabled={!useLinkTraversal && !(datasources.length > 0)}
 					onClick={() => {
 						console.log('Query:', sparqlQuery);
 						console.log('Predicates:', predicates);
-						console.log(inputValue);
+						console.log(datasources);
 					}}
 				>
 					Run Query
