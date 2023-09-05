@@ -5,6 +5,7 @@ import './styles/QueryExecution.scss';
 import { iriIsValid } from './iri-validation';
 import { DebounceInput } from 'react-debounce-input';
 import { QueryEngine } from '@comunica/query-sparql';
+import { QueryEngineFactory } from '@comunica/query-sparql-link-traversal-custom';
 import { Bindings, IDataSource } from '@comunica/types';
 import BarLoader from 'react-spinners/BarLoader';
 
@@ -37,6 +38,10 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 		setQueryResults([]);
 
 		if (useLinkTraversal) {
+			const queryEngine = await new QueryEngineFactory().create({
+				configPath: '',
+			});
+			console.log(queryEngine);
 			alert('Not implemented yet!');
 		} else {
 			const queryEngine = new QueryEngine();
