@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { SelectedProperty, PropertyDetails } from './types';
+import { languages } from './language-names-codes';
 import './styles/PropertyBlock.scss';
 
 interface PropertyBlockProps {
@@ -85,9 +86,13 @@ const PropertyBlock: React.FC<PropertyBlockProps> = ({
 					onChange={(e) => setLanguageFilter(e.target.value)}
 				>
 					<option value="">Select language</option>
-					<option value="nl">Dutch</option>
-					<option value="en">English</option>
+					{Object.entries(languages).map(([name, code]) => (
+						<option key={code} value={code}>
+							{name}
+						</option>
+					))}
 				</select>
+
 				<div>
 					<input
 						type="checkbox"
