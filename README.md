@@ -25,3 +25,7 @@ This React App (built using Vite) lets users select properties that translate to
    ```bash
    npm link sparql-query-builder
    ```
+5. To start the application (on port 8000), run:
+   ```bash
+   npm run dev -- --port 8000
+   ```
