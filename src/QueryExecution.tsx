@@ -4,6 +4,8 @@ import 'react-toggle/style.css';
 import './styles/QueryExecution.scss';
 import { iriIsValid } from './iri-validation';
 import { DebounceInput } from 'react-debounce-input';
+import { QueryEngine } from '@comunica/query-sparql';
+import { Bindings, IDataSource } from '@comunica/types';
 
 interface QueryExecutionProps {
 	sparqlQuery: string;
@@ -24,6 +26,29 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 				.map((datasource) => datasource.trim())
 				.filter((datasource) => iriIsValid(datasource))
 		);
+	};
+
+	const executeQuery = async () => {
+		if (useLinkTraversal) {
+			alert('Not implemented yet!');
+		} else {
+			const queryEngine = new QueryEngine();
+			const bindingsStream = await queryEngine.queryBindings(sparqlQuery, {
+				sources: [...datasources] as [IDataSource, ...IDataSource[]],
+			});
+
+			bindingsStream.on('data', (bindings: Bindings) => {
+				console.log(bindings.toString());
+			});
+
+			bindingsStream.on('end', () => {
+				console.log('END');
+			});
+
+			bindingsStream.on('error', (error: Error) => {
+				console.error(error.message);
+			});
+		}
 	};
 
 	return (
@@ -48,11 +73,7 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 				</label>
 				<button
 					disabled={!useLinkTraversal && !(datasources.length > 0)}
-					onClick={() => {
-						console.log('Query:', sparqlQuery);
-						console.log('Predicates:', predicates);
-						console.log(datasources);
-					}}
+					onClick={executeQuery}
 				>
 					Run Query
 				</button>

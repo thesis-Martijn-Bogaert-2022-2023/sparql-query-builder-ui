@@ -12,6 +12,7 @@
 		"postuninstall": "npm unlink sparql-query-builder"
 	},
 	"dependencies": {
+		"@comunica/query-sparql": "^2.8.3",
 		"copy-text-to-clipboard": "^3.2.0",
 		"prismjs": "^1.29.0",
 		"react": "^18.2.0",
