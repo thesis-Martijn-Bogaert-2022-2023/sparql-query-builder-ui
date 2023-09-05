@@ -3,7 +3,8 @@
 		"cidoc": "http://www.cidoc-crm.org/cidoc-crm/",
 		"adms": "http://www.w3.org/ns/adms#",
 		"skos": "http://www.w3.org/2004/02/skos/core#",
-		"la": "https://linked.art/ns/terms/"
+		"la": "https://linked.art/ns/terms/",
+		"rdfs": "http://www.w3.org/2000/01/rdf-schema#"
 	},
 	"properties": {
 		"Title": {

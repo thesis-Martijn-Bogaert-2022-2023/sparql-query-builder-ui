@@ -18,6 +18,9 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 }) => {
 	const [useLinkTraversal, setUseLinkTraversal] = useState<boolean>(false);
 	const [datasources, setDatasources] = useState<string[]>([]);
+	const [queryResults, setQueryResults] = useState<
+		Array<Record<string, string>>
+	>([]);
 
 	const handleDatasourcesChange = (datasourcesInput: string) => {
 		setDatasources(
@@ -29,6 +32,8 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 	};
 
 	const executeQuery = async () => {
+		setQueryResults([]);
+
 		if (useLinkTraversal) {
 			alert('Not implemented yet!');
 		} else {
@@ -38,7 +43,12 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 			});
 
 			bindingsStream.on('data', (bindings: Bindings) => {
-				console.log(bindings.toString());
+				const queryResult: Record<string, string> = {};
+				for (const key of bindings.keys()) {
+					const value = bindings.get(key)?.value;
+					if (value) queryResult[key.value] = value;
+				}
+				setQueryResults((prevResults) => [...prevResults, queryResult]);
 			});
 
 			bindingsStream.on('end', () => {
@@ -77,6 +87,17 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 				>
 					Run Query
 				</button>
+			</div>
+			<div className="query-results">
+				{queryResults.map((result, index) => (
+					<div key={index}>
+						{Object.entries(result).map(([key, value]) => (
+							<div key={key}>
+								<strong>{key}:</strong> {value}
+							</div>
+						))}
+					</div>
+				))}
 			</div>
 		</>
 	);
