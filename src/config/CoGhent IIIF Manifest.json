@@ -1,0 +1,374 @@
+{
+	"prefixes": {
+		"cidoc": "http://www.cidoc-crm.org/cidoc-crm/",
+		"dc": "http://purl.org/dc/elements/1.1/",
+		"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+		"iiif": "http://iiif.io/api/presentation/2#",
+		"exif": "http://www.w3.org/2003/12/exif/ns#",
+		"oa": "http://www.w3.org/ns/oa#",
+		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	},
+	"properties": {
+		"Manifest ID": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				}
+			],
+			"question": "What is the ID of the Human-Made Object's manifest?"
+		},
+		"Manifest Type": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "type"
+				}
+			],
+			"question": "What is the type of the Human-Made Object's manifest?"
+		},
+		"Description": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "dc",
+					"predicate": "description"
+				}
+			],
+			"question": "How can the Human-Made Object be described?"
+		},
+		"Label": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "rdfs",
+					"predicate": "label"
+				}
+			],
+			"question": "What is the Human-Made Object called?"
+		},
+		"Image URL": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasSequences"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasCanvases"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasImageAnnotations"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "oa",
+					"predicate": "hasBody"
+				}
+			],
+			"question": "What is the Human-Made Object's image URL?"
+		},
+		"Image Height": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasSequences"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasCanvases"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "exif",
+					"predicate": "height"
+				}
+			],
+			"question": "What is the height of the Human-Made Object's image?"
+		},
+		"Image Width": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasSequences"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasCanvases"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "exif",
+					"predicate": "width"
+				}
+			],
+			"question": "What is the width of the Human-Made Object's image?"
+		},
+		"Image Label": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasSequences"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasCanvases"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "rdfs",
+					"predicate": "label"
+				}
+			],
+			"question": "What is the label of the Human-Made Object's image?"
+		},
+		"Image Attribution": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasSequences"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasCanvases"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasImageAnnotations"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "attributionLabel"
+				}
+			],
+			"question": "What is the attribution label of the Human-Made Object's image?"
+		},
+		"Image Rights": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasSequences"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasCanvases"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasImageAnnotations"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "dc",
+					"predicate": "rights"
+				}
+			],
+			"question": "What are the rights associated with the Human-Made Object's image?"
+		},
+		"Image Format": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasSequences"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasCanvases"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasImageAnnotations"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "dc",
+					"predicate": "format"
+				}
+			],
+			"question": "What is the format of the Human-Made Object's image?"
+		},
+		"Image Service": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasSequences"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasCanvases"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasImageAnnotations"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "sioc",
+					"predicate": "has_service"
+				}
+			],
+			"question": "What is the service associated with the Human-Made Object's image?"
+		},
+		"Image Implementation": {
+			"statements": [
+				{
+					"prefix": "cidoc",
+					"predicate": "P129i_is_subject_of"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasSequences"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasCanvases"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "iiif",
+					"predicate": "hasImageAnnotations"
+				},
+				{
+					"prefix": "rdf",
+					"predicate": "first"
+				},
+				{
+					"prefix": "sioc",
+					"predicate": "has_service"
+				},
+				{
+					"prefix": "doap",
+					"predicate": "implements"
+				}
+			],
+			"question": "What implementation is associated with the Human-Made Object's image service?"
+		}
+	}
+}

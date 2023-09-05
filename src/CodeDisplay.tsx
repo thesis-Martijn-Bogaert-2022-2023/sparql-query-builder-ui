@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React, { useState, useEffect } from 'react';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
@@ -26,6 +27,13 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 	const [offset, setOffset] = useState<number | null>(null);
 	const [uniquePredicates, setUniquePredicates] = useState<string[]>([]);
 
+	const removeSpecialCharacters = (input: string) => {
+		return input
+			.replace(/[^a-zA-Z0-9]+/g, ' ')
+			.trim()
+			.replaceAll(' ', '_');
+	};
+
 	const updateQuery = () => {
 		const propertiesObject: Properties = selectedProperties.reduce(
 			(acc, curr) => {
@@ -34,9 +42,12 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
 						prop.propertyName === curr.propertyName &&
 						prop.fileName !== curr.fileName
 				);
+
 				const key = existingProperty
-					? `${curr.propertyName}_${curr.fileName}`
-					: curr.propertyName;
+					? removeSpecialCharacters(curr.propertyName) +
+					  '_' +
+					  removeSpecialCharacters(curr.fileName)
+					: removeSpecialCharacters(curr.propertyName);
 				acc[key] = curr.propertyDetails;
 				return acc;
 			},
