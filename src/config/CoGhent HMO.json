@@ -32,7 +32,7 @@
 					"predicate": "P129i_is_subject_of"
 				}
 			],
-			"question": "What is the Human-Made Object's image URL?"
+			"question": "What is the Human-Made Object's IIIF Manifest URL?"
 		},
 		"Objectname": {
 			"statements": [

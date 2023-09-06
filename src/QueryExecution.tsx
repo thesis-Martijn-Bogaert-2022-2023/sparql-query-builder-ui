@@ -7,6 +7,7 @@ import { DebounceInput } from 'react-debounce-input';
 import { QueryEngine } from '@comunica/query-sparql';
 import { Bindings, IDataSource } from '@comunica/types';
 import BarLoader from 'react-spinners/BarLoader';
+import { actorExtractLinksPredicatesConfig } from './lt-config';
 
 interface QueryExecutionProps {
 	sparqlQuery: string;
@@ -37,7 +38,17 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 		setQueryResults([]);
 
 		if (useLinkTraversal) {
-			alert('Not implemented yet!');
+			// Make actor configuration and make user download it
+			const configJson = actorExtractLinksPredicatesConfig(predicates);
+			const blob = new Blob([configJson], { type: 'application/json' });
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'extract-links-predicates.json';
+			document.body.appendChild(a);
+			a.click();
+			URL.revokeObjectURL(url);
+			document.body.removeChild(a);
 		} else {
 			const queryEngine = new QueryEngine();
 
@@ -91,7 +102,7 @@ const QueryExecution: React.FC<QueryExecutionProps> = ({
 					disabled={!useLinkTraversal && !(datasources.length > 0)}
 					onClick={executeQuery}
 				>
-					Run Query
+					{useLinkTraversal ? 'Download Predicates Actor Config' : 'Run Query'}
 				</button>
 			</div>
 			<div className={`loader-container${loading ? ' loading' : ''}`}>
